@@ -38,7 +38,6 @@
 
 > **Note**: I want to keep this widget as simple as I can. Don't expect so much features to be added.
 
-
 ## 🔐 Privacy Policy
 
 Todoist-Widget does NOT:
@@ -46,6 +45,10 @@ Todoist-Widget does NOT:
 - collect any personal information,
 - track you,
 - send any data to any server.
+
+## Disclaimer
+
+This project is not affiliated with Todoist or Doist. It is not an official Todoist product. It is an open-source project that aims to extends the current Todoist experience by providing a simple and lightweight widget for your desktop.
 
 ## ⚖️ License
 

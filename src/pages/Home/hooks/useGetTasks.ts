@@ -4,29 +4,34 @@ import { Task } from "../../../types/Task"
 import { useSelectedDayStore } from "../stores/useSelectedDayStore"
 
 export const useGetTasks = (token: string) => {
-    const [loadingTasks, setLoadingTasks] = useState(false)
+    const [loadingTasks, setLoadingTasks] = useState(true)
+    const [isError, setIsError] = useState(false)
     const [tasks, setTasks] = useState<Task[]>([])
     const selectedDate = useSelectedDayStore(s => s.day)
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            getDayTasks(token, selectedDate).then(setTasks)
-        }, 1000 * 5)
-
-        setLoadingTasks(true)
-
-        getDayTasks(token, selectedDate).then((t) => {
-            setTasks(t)
+    const handleGetTasks = async () => {
+        try {
+            const fetchedTasks = await getDayTasks(token, selectedDate)
+            setTasks(fetchedTasks)
             setLoadingTasks(false)
-        })
-
-        return () => {
-            clearInterval(intervalId)
+            setIsError(false)
+        } catch (error) {
+            setLoadingTasks(false)
+            setIsError(true)
         }
+    }
+
+    useEffect(() => {
+        const intervalId = setInterval(handleGetTasks, 1000 * 5)
+
+        handleGetTasks()
+
+        return () => clearInterval(intervalId)
     }, [token, selectedDate])
 
     return {
         tasks,
+        isError,
         loadingTasks,
     }
 }

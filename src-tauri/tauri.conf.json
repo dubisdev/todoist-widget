@@ -26,7 +26,8 @@
       }
     ],
     "trayIcon": {
-      "iconPath": "icons/icon.png"
+      "iconPath": "icons/icon.png",
+      "tooltip": "Todoist Widget"
     },
     "security": {
       "csp": null

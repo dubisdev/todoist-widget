@@ -26,8 +26,9 @@ export const getDayTasks = async (token: string, date: Date): Promise<Task[]> =>
 
             tasks.push(...response.results)
         } catch (error) {
-            console.log(error)
             cursor = null // Reset cursor on error
+            console.log(error)
+            throw error
         }
     } while (cursor)
 

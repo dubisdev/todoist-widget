@@ -23,6 +23,11 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
     --radius: 0.5rem;
+    /* Todoist Official Palette */
+    --todoist-p4-color: #d1453b;
+    --todoist-p3-color: #eb8909;
+    --todoist-p2-color: #246fe0;
+    --todoist-p1-color: #666;
   }
 }
 

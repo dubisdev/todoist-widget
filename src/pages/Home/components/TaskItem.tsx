@@ -1,12 +1,15 @@
+import { completeTask } from "../../../services/completeTask";
 import { Task } from "../../../types/Task"
+import { useTokenStore } from "../../Settings/store/useTokenStore";
+import { useState } from "react";
 
 interface TaskCompleteMarkProps {
-    priority?: number
+    priority: number
     isCompleted?: boolean
 }
 
 export const TaskCompleteMark = ({ priority, isCompleted = false }: TaskCompleteMarkProps) => {
-    const priorityColor = priority ? `var(--p${priority}-color, #808080)` : '#808080';
+    const priorityColor = `var(--todoist-p${priority}-color, #808080)`;
 
     return (
         <div className="relative w-4 h-4">
@@ -32,13 +35,29 @@ interface TaskItemProps {
 }
 
 export const TaskItem = (props: TaskItemProps) => {
-    return <div className="hover:bg-gray-500 flex items-center justify-between bg-secondary px-1 py-0.5 rounded-md cursor-pointer">
-        <div className="flex items-center gap-3">
+    const [showTask, setShowTask] = useState(true);
+    const token = useTokenStore(s => s.token)
+
+    const handleClick = async () => {
+        await completeTask({
+            taskId: props.task.id,
+            token
+        });
+
+        setShowTask(false);
+    }
+
+    if (!showTask) return null
+
+    return <div
+        onClick={handleClick}
+        className="hover:bg-gray-500 flex items-center justify-between bg-secondary px-1 py-0.5 rounded-md cursor-pointer">
+        <div className="flex items-center gap-3 flex-1 min-w-0">
             <TaskCompleteMark
                 priority={props.task.priority}
                 isCompleted={false} // This will be replaced with props.task.completed when available
             />
-            <span className="text-secondary-foreground text-md">
+            <span className="text-secondary-foreground text-md whitespace-nowrap overflow-hidden text-ellipsis">
                 {props.task.title}
             </span>
         </div>

@@ -3,7 +3,7 @@ import { TokenInput } from "./components/TokenInput"
 export const SettingsPage = () => {
     return (
         <div className="space-y-0.5">
-            <h1 className="text-base font-bold">Settings</h1>
+            <h1 className="text-base font-bold">Todoist Widget Settings</h1>
 
             <div className="bg-card p-1 rounded border border-border">
                 <label className="block text-sm font-medium mb-0.5">
