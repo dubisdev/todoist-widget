@@ -1,4 +1,4 @@
-import { TodoistApi, Task as TodoistApiTask, TodoistRequestError } from "@doist/todoist-api-typescript"
+import { TodoistApi, Task as TodoistApiTask } from "@doist/todoist-api-typescript"
 import { Task } from "../types/Task"
 
 export const getTodayTasks = async (token: string): Promise<Task[]> => {
