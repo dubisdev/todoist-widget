@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react"
-import { getTodayTasks } from "../../../services/getTodayTasks"
+import { getDayTasks } from "../../../services/getTodayTasks"
 import { Task } from "../../../types/Task"
+import { useSelectedDayStore } from "../stores/useSelectedDayStore"
 
 export const useGetTasks = (token: string) => {
     const [loadingTasks, setLoadingTasks] = useState(false)
     const [tasks, setTasks] = useState<Task[]>([])
+    const selectedDate = useSelectedDayStore(s => s.day)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            getTodayTasks(token).then(setTasks)
+            getDayTasks(token, selectedDate).then(setTasks)
         }, 1000 * 5)
 
         setLoadingTasks(true)
 
-        getTodayTasks(token).then((t) => {
+        getDayTasks(token, selectedDate).then((t) => {
             setTasks(t)
             setLoadingTasks(false)
         })
@@ -21,7 +23,7 @@ export const useGetTasks = (token: string) => {
         return () => {
             clearInterval(intervalId)
         }
-    }, [])
+    }, [token, selectedDate])
 
     return {
         tasks,

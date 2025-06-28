@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
 import { isDateToday, formatDateDisplay, getPreviousDate, getNextDate } from "../utils/time";
 import { Link, useLocation } from "wouter";
+import { useSelectedDayStore } from "../pages/Home/stores/useSelectedDayStore";
 
 interface NavigationButtonProps {
     direction: 'left' | 'right' | 'settings';
@@ -100,15 +100,18 @@ const DateDisplay = ({ date }: { date: Date }) => {
 };
 
 const useDateNavigation = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const selectedDate = useSelectedDayStore(s => s.day)
+    const setSelectedDate = useSelectedDayStore(s => s.setDay);
 
-    const goToPreviousDay = useCallback(() => {
-        setSelectedDate(current => getPreviousDate(current));
-    }, []);
+    const goToPreviousDay = () => {
+        const prevDay = getPreviousDate(selectedDate);
 
-    const goToNextDay = useCallback(() => {
-        setSelectedDate(current => getNextDate(current));
-    }, []);
+        setSelectedDate(prevDay);
+    }
+
+    const goToNextDay = () => {
+        setSelectedDate(getNextDate(selectedDate));
+    }
 
     return {
         selectedDate,
