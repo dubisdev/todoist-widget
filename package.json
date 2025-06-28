@@ -1,5 +1,5 @@
 {
-  "name": "@dubisdev/todoist-windows-widget",
+  "name": "@dubisdev/todoist-widget",
   "private": true,
   "version": "0.0.0-development",
   "type": "module",
