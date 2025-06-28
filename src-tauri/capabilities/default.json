@@ -1,0 +1,22 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "opener:default",
+    "positioner:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://api.todoist.com"
+        }
+      ]
+    }
+  ]
+}
