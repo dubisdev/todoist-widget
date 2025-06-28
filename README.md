@@ -36,6 +36,8 @@
 - `See your tasks`
 - `Mark them as completed`
 
+![Todoist Widget Gif](./assets/todoist-widget.gif)
+
 > **Note**: I want to keep this widget as simple as I can. Don't expect so much features to be added.
 
 ## 🔐 Privacy Policy
